@@ -19,6 +19,10 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
             <form role="form" action="/board/modify" method="post">
+            
+            <!-- pageNum, amount 추가 -->
+            <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+            <input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
             	<div class="form-group">
             		<label>Bno</label> <input class="form-control" name='bno'
             		value='<c:out value="${board.bno}"/>' readonly="readonly">
@@ -58,30 +62,32 @@
 <!-- /.row -->
 
 <script type="text/javascript">
-$(document).ready(function() {
-
-
-	  var formObj = $("form");
-
-	  $('button').on("click", function(e){
-	    
-	    e.preventDefault(); 
-	    
-	    var operation = $(this).data("oper");
-	    
-	    console.log(operation);
-	    
-	    if(operation === 'remove'){
-	      formObj.attr("action", "/board/remove");
-	      
-	    }else if(operation === 'list'){
-	    	self.location="/board/list";
-	    	return;
-	    }
-	    
-	    formObj.submit();
-	  });
-
-});
+	$(document).ready(function() {
+	
+		  var formObj = $("form");
+		  $('button').on("click", function(e){
+		  	e.preventDefault(); 
+		    
+		  	var operation = $(this).data("oper");
+		    console.log(operation);
+		    
+		    if(operation === 'remove'){
+		      formObj.attr("action", "/board/remove");
+		      
+		    } else if(operation === 'list'){
+		    	// list 버튼 클릭시에 form 태그내에서 필요한 부분만 복사(clone)해서 보관 후 form내의 내용 삭제(empty)
+		    	formObj.attr("action", "/board/list").attr("method", "get");
+		    	var pageNumTag = $("input[name='pageNum']").clone();
+		    	var amountTag = $("input[name='amount']").clone();
+		    	
+		    	formObj.empty();
+		    	// 이후 다시 필요한 요소만 추가해서 /board/list를 호출
+		    	formObj.append(pageNumTag);
+		    	formObj.append(amountTag);
+		    }
+		    formObj.submit();
+		  });
+	
+	});
 </script>
 <%@ include file="../includes/footer.jsp" %>
