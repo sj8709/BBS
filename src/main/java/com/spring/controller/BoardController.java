@@ -73,6 +73,8 @@ public class BoardController {
 		// 리다이렉트 시에 원래의 페이지로 이동하기 위해서 pageNum, amout 값을 가지고 이동하게 수정
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		return "redirect:/board/list";
 	}
@@ -83,11 +85,8 @@ public class BoardController {
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:/board/list";
+		//위의 것들을 Criteria에 추가해준 getListLink()로 해결
+		return "redirect:/board/list" + cri.getListLink();
 	}
 }
 

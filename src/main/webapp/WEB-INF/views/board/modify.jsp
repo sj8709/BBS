@@ -19,10 +19,11 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
             <form role="form" action="/board/modify" method="post">
-            
-            <!-- pageNum, amount 추가 -->
+            <!-- pageNum, amount 값넘기기 추가 -->
             <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
             <input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+            <input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
+            <input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
             	<div class="form-group">
             		<label>Bno</label> <input class="form-control" name='bno'
             		value='<c:out value="${board.bno}"/>' readonly="readonly">
@@ -79,11 +80,16 @@
 		    	formObj.attr("action", "/board/list").attr("method", "get");
 		    	var pageNumTag = $("input[name='pageNum']").clone();
 		    	var amountTag = $("input[name='amount']").clone();
+		    	var keywordTag = $("input[name='keyword']").clone();
+		    	var typeTag = $("input[name='type']").clone();
 		    	
 		    	formObj.empty();
+		    	
 		    	// 이후 다시 필요한 요소만 추가해서 /board/list를 호출
 		    	formObj.append(pageNumTag);
 		    	formObj.append(amountTag);
+		    	formObj.append(keywordTag);
+		    	formObj.append(typeTag);
 		    }
 		    formObj.submit();
 		  });
