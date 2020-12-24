@@ -97,8 +97,8 @@ root-context
 - BoardServiceTests(CRUD)
 
 
-BoardMapperTests(CRUD) 기능 구현
-BoardServiceTests(CRUD) 기능 구현
+- BoardMapperTests(CRUD) 기능 구현
+- BoardServiceTests(CRUD) 기능 구현
 
 
 ### -4-
@@ -106,29 +106,27 @@ BoardServiceTests(CRUD) 기능 구현
 - ControllerTest 부분 추가(BoardMapperTests.java)
 - Controller 부분에서의 CRUD 추가 및 테스트
 ### BBS_1
-modal 창 추가
-각 페이지 밑에 버튼 추가
-Citeria(페이징 처리) 추가
-각 페이지에 pageNum, amount 값 추가
+- modal 창 추가
+- 각 페이지 밑에 버튼 추가
+- Citeria(페이징 처리) 추가
+- 각 페이지에 pageNum, amount 값 추가
 ### BBS_2
-Citeria(검색 처리) 추가
+- Citeria(검색 처리) 추가
 list.jsp
 - 검색창 추가 및 검색 처리
-파라미터를 url로 넘겨 list에 클릭시 전에 보던 페이지로 이동하게 만듬
+- 파라미터를 url로 넘겨 list에 클릭시 전에 보던 페이지로 이동하게 만듬
 ### BBS_3
-comment CRUD 추가
+#### comment CRUD 추가
 - ReplyMapper.java
 - ReplyMapper.xml
 - ReplyVO.java
-comment mapper Tests 추가
+#### comment mapper Tests 추가
 - ReplyMapperTests.java
-comment service 단 추가
+#### comment service 단 추가
 - ReplyService.java
 - ReplyServicelmpl.java
 
 ### 기타
-maven 관련
-https://mvnrepository.com/
+maven 관련 https://mvnrepository.com/
 
-부트 스트랩 다운
-https://startbootstrap.com/theme/sb-admin-2
+부트 스트랩 다운 https://startbootstrap.com/theme/sb-admin-2
