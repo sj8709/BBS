@@ -18,6 +18,7 @@ Spring Framework를 기반으로 한 CRUD 게시판 제작
 
 ## SQL Query
 - tb1_board
+
 create sequence seq_board;
 
 create table tb1_board(
@@ -36,6 +37,7 @@ insert into tb1_board(bno, title, content, writer)
 values(SEQ_BOARD.nextval, 'test title', 'test content', 'user');
 
 - tb1_reply
+
 create table tb1_reply (
 rno number(10,0),
 bno number(10,0) not null,
