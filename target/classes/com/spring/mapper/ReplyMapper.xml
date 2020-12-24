@@ -28,4 +28,12 @@
   	<update id="update">
   		update tb1_reply set reply = #{reply}, updatedate = sysdate where rno = #{rno}
   	</update>
+  	
+  	<!-- 페이징 처리 -->
+  	<select id = "getListWithPaging" resultType = "com.spring.domain.ReplyVO">
+  		select rno, bno, reply, replyer, replyDate, updateDate
+  		from tb1_reply
+  		where bno = #{bno}
+  		order by rno asc
+  	</select>
   </mapper>
