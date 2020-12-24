@@ -1,7 +1,7 @@
 # Board
 Spring Framework를 기반으로 한 CRUD 게시판 제작
 
-![list](https://user-images.githubusercontent.com/42952319/98673511-c7dcbc80-239a-11eb-82b5-12844f29743f.PNG)
+![index](https://user-images.githubusercontent.com/42952319/103095616-8e0eff00-4644-11eb-86e4-00a2bbb72c4b.PNG)
 
 ## 개발 언어 및 환경
 - bootstrap(http://startbootstrap.com/template-overviews/sb-admin-2/)
