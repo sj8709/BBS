@@ -88,7 +88,33 @@ modal 창 추가
 Citeria(페이징 처리) 추가
 각 페이지에 pageNum, amount 값 추가
 ===========================================================
-
+BBS_2
 Citeria(검색 처리) 추가
 list.jsp
 - 검색창 추가 및 검색 처리
+파라미터를 url로 넘겨 list에 클릭시 전에 보던 페이지로 이동하게 만듬
+===========================================================
+- 댓글 처리를 위한 테이블 및 시퀸스 생성
+create table tb1_reply (
+rno number(10,0),
+bno number(10,0) not null,
+reply varchar2(1000) not null,
+replyer varchar2(50) not null,
+replydate date default sysdate,
+updatedate date default sysdate
+);
+
+create sequence seq_reply;
+
+alter table tb1_reply add constraint pk_reply primary key (rno);
+
+alter table tb1_reply add constraint fk_reply_board
+foreign key(bno) references tb1_board(bno);
+
+
+comment CRUD 추가
+- ReplyMapper.java
+- ReplyMapper.xml
+- ReplyVO.java
+comment mapper Tests 추가
+- ReplyMapperTests.java
