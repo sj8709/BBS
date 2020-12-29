@@ -21,5 +21,5 @@ public interface ReplyMapper {
 	
 	public List<ReplyVO> getListWithPaging(
 			@Param("cri") Criteria cri,
-			@Param("Bno") Long bno);
+			@Param("bno") Long bno);
 }

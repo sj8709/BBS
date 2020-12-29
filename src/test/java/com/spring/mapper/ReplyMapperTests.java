@@ -69,7 +69,7 @@ public class ReplyMapperTests {
 //		int count = mapper.update(vo);
 //		log.info("UPDATE COUNT : " + count);
 //	}
-	
+//	
 //	@Test
 //	public void testList() {
 //		Criteria cri = new Criteria();
