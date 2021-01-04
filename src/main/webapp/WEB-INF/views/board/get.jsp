@@ -285,9 +285,7 @@
 		     }
 			 
 		     for(var i = startNum ; i <= endNum; i++){
-		          
 		          var active = pageNum == i? "active":"";
-		          
 		          str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 		     }
 			 
@@ -296,9 +294,7 @@
 		     }
 		   	 
 		   	 str += "</ul></div>";
-		   	 
 		   	 console.log(str);
-		   	 
 		   	 replyPageFooter.html(str);
 		 }
 		 

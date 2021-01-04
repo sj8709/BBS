@@ -1,7 +1,11 @@
 # Board
 Spring Framework를 기반으로 한 CRUD 게시판 제작
 
-![index](https://user-images.githubusercontent.com/42952319/103095616-8e0eff00-4644-11eb-86e4-00a2bbb72c4b.PNG)
+![index](https://user-images.githubusercontent.com/42952319/103534254-e3170480-4ed1-11eb-8ca1-3b2f5615dbce.PNG)
+![get](https://user-images.githubusercontent.com/42952319/103534287-ee6a3000-4ed1-11eb-8187-2d7732ce0da8.PNG)
+![get_modal](https://user-images.githubusercontent.com/42952319/103534304-f5913e00-4ed1-11eb-9edf-a32121ec5a1d.PNG)
+
+
 
 ## 개발 언어 및 환경
 - bootstrap(http://startbootstrap.com/template-overviews/sb-admin-2/)
@@ -151,7 +155,12 @@ root-context
 - service 부분 reply 관련 추가
 - contorller 부분 수정
 - 페이징 관련 함수 추가
-
+#### tb1_board 테이블 변경
+- alter table tb1_board add (replycnt number default 0);
+- update tb1_board set replycnt = (select count(rno) from tb1_reply where tb1_reply.bno = tb1_board.bno);
+#### 댓글과 댓글 수에 대한 처리
+- BoardVO, BoardMapper 수정(replyCnt)
+- list.jsp(게시글 옆에 게시글의 댓글 수 표시) 수정
 
 
 
