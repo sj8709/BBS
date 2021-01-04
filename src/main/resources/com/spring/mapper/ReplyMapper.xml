@@ -31,9 +31,24 @@
   	
   	<!-- 페이징 처리 -->
   	<select id = "getListWithPaging" resultType = "com.spring.domain.ReplyVO">
-  		select rno, bno, reply, replyer, replyDate, updateDate
-  		from tb1_reply
-  		where bno = #{bno}
-  		order by rno asc
+  		<![CDATA[
+  			select rno, bno, reply, replyer, replyDate, updateDate
+  			from
+  			(
+  				select /*+INDEX(tb1_reply idx_reply) */
+  				rownum rn, rno, bno, reply, replyer, replyDate, updateDate
+		  		from tb1_reply
+		  		where bno = #{bno}
+		  		and rno > 0
+		  		and rownum <= #{cri.pageNum} * #{cri.amount}
+  			) where rn > (#{cri.pageNum}-1) * #{cri.amount}
+  		]]>
+  	</select>
+  	
+  	<!-- 댓글 숫자 파악 -->
+  	<select id = "getCountByBno" resultType = "int">
+  		<![CDATA[
+  			select count(rno) from tb1_reply where bno = #{bno}
+  		]]>
   	</select>
   </mapper>

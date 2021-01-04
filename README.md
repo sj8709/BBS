@@ -129,14 +129,29 @@ root-context
 - ReplyService.java
 - ReplyServicelmpl.java
 
-###BBS_4
+### BBS_4
 #### ReplyController.java 추가
 - comment(댓글) CRUD처리
 #### javascript 모듈 구성
 - reply.js(add, getList, remove, update, get, displyTime) 추가
-#### get(개시글) 화면에 comment(댓글) 추가
+#### get.jsp
+- get(개시글) 화면에 comment(댓글) 구현
 - new reply 버튼 추가
 - modal 화면 추가
+
+### BBS_5
+#### modal CRUD 구현
+- new reply 버튼 이벤트 구현
+- modal창 modify, remove 버튼 이벤트 구현
+- 댓글 클릭시 get 이벤트 구현
+#### 댓글 페이징 처리
+- ReplyMapper.xml sql 부분 추가
+- ReplyMapper Interface getCountByBno 추가(게시글에서 댓글 총 숫자 파악)
+- ReplyPageDTO 추가(댓글수와 List<ReplyVO>)
+- service 부분 reply 관련 추가
+- contorller 부분 수정
+- 페이징 관련 함수 추가
+
 
 
 

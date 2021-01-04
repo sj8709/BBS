@@ -25,9 +25,22 @@ public class ReplyMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private ReplyMapper mapper;
 	
+//	@Test
+//	public void testReadAll() {
+//		mapper.getList().forEach(vo -> log.info(vo));
+//	}
+//	
+//	@Test
+//	public void testList() {
+//		Criteria cri = new Criteria(2, 10);
+//		List<ReplyVO> replies = mapper.getListWithPaging(cri, 51L);
+//		replies.forEach(reply -> log.info(reply));
+//	}
+	
 	@Test
-	public void testReadAll() {
-		mapper.getList().forEach(vo -> log.info(vo));
+	public void testCnt() {
+		int Cnt = mapper.getCountByBno(51L);
+		log.info(Cnt);
 	}
 	
 //	@Test

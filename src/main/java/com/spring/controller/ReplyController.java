@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.ReplyPageDTO;
 import com.spring.domain.ReplyVO;
 import com.spring.service.ReplyService;
 
@@ -50,11 +51,12 @@ public class ReplyController {
 	// Criteria를 이용해서 파라미터 수집
 	// 게시물 번호는 @PathVariable을 이용해서 파라미터로 처리
 	@GetMapping(value = "/pages/{bno}/{page}", produces= { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
 		log.info("getList.........");
-		Criteria cri = new Criteria(page,10);
-		log.info(cri);
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		Criteria cri = new Criteria(page, 10);
+		log.info("get Reply List bno: " + bno);
+		log.info("cri: " + cri);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 
 	// 댓글 조회
@@ -76,12 +78,12 @@ public class ReplyController {
 	//댓글 수정
 	// 실제 수정되는 데이터는  JSON 포맷이므로 @RequestBody를 이용해서 처리
 	// @RequestBody로 처리되는 데이터는 @PathVarialbe 파라미터를 처리할 수 없기 때문에 직접 처리함
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH }, value="/{rno}", consumes = "application/json", produces= {MediaType.TEXT_PLAIN_VALUE })
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		vo.setRno(rno);
 		log.info("rno: " + rno);
 		log.info("modify: " + vo);
-		return service.remove(rno) == 1
+		return service.modify(vo) == 1
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
