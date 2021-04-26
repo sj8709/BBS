@@ -2,12 +2,17 @@ package com.spring.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.spring.domain.BoardVO;
 import com.spring.domain.Criteria;
+import com.spring.mapper.BoardAttachMapper;
 import com.spring.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -15,8 +20,11 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService{
 	
+	@Setter(onMethod_=@Autowired)
 	private BoardMapper mapper;
 	
+	@Setter(onMethod_=@Autowired)
+	private BoardAttachMapper attachMapper;
 //	@Override
 //	public List<BoardVO> getList() {
 //		log.info("getList.......");
@@ -29,10 +37,23 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getListWithPaging(cri);
 	}
 	
+	@Transactional
 	@Override
 	public void register(BoardVO board) {
 		log.info("register....." + board);
 		mapper.insertSelectKey(board);
+		
+		
+		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		
+		board.getAttachList().forEach(attach -> {
+
+			attach.setBno(board.getBno());
+			attachMapper.insert(attach);
+		});
 	}
 	
 	@Override

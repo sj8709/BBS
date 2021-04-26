@@ -54,8 +54,15 @@ public class BoardController {
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 
+		log.info("===============================================================================");
 		log.info("register: " + board);
+		if(board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
+		log.info("===============================================================================");
 
+		
 		service.register(board);
 		//redirect: 접투어를 사용하게 되면 spring mvc가 내부적으로 response.sendRedirect()를 처리해 줌
 		rttr.addFlashAttribute("result", board.getBno());
