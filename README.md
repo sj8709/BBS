@@ -181,6 +181,8 @@ root-context
 ### BBS_6
 #### 파일 첨부 관련 설정 추가
 - pom.xml, web.xml, servlet-context.xml 관련 내용 추가
+#### 파일 관련 테이블 추가
+- tb1_attach table 
 #### upload test 페이지 구현
 - uploadAjax.jsp 추가 및 구현
 #### uploadController 추가
