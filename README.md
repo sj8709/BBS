@@ -58,6 +58,22 @@ alter table tb1_reply add constraint pk_reply primary key (rno);
 alter table tb1_reply add constraint fk_reply_board
 foreign key(bno) references tb1_board(bno);
 
+- tb1_attach
+
+create table tb1_attach (
+    uuid varchar2(100) not null,
+    uploadPath varchar2(200) not null,
+    fileName varchar2(100) not null,
+    fileType char(1) default 'I',
+    bno number(10,0)
+);
+
+alter table tb1_attach add constraint pk_attach primary key (uuid);
+
+alter table tb1_attach add constraint fk_board_attach foreign key (bno)
+references tb1_board(bno);
+
+
 ##
 ### -1-
 
@@ -161,6 +177,19 @@ root-context
 #### 댓글과 댓글 수에 대한 처리
 - BoardVO, BoardMapper 수정(replyCnt)
 - list.jsp(게시글 옆에 게시글의 댓글 수 표시) 수정
+
+### BBS_6
+#### 파일 첨부 관련 설정 추가
+- pom.xml, web.xml, servlet-context.xml 관련 내용 추가
+#### upload test 페이지 구현
+- uploadAjax.jsp 추가 및 구현
+#### uploadController 추가
+- 파일 추가시에 해당 날짜의 폴더 자동 생성
+- 이미지 파일 추가시 thumbnail 파일 생성 및 웹페이지 화면에 보이게 설정
+- 추가 된 파일 삭제시에 원본 파일, 이미지의 경우 섬네일 파일까지 삭제 처리 구현
+- 헤더의 User-Agent 기능을 이용해 브라우저 식별 후 각 브라우저에 맞게 인코딩 처리하여 한글 깨짐 방지 처리
+
+
 
 
 
