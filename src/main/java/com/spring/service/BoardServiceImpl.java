@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.domain.BoardAttachVO;
 import com.spring.domain.BoardVO;
 import com.spring.domain.Criteria;
 import com.spring.mapper.BoardAttachMapper;
@@ -25,6 +26,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Setter(onMethod_=@Autowired)
 	private BoardAttachMapper attachMapper;
+	
 //	@Override
 //	public List<BoardVO> getList() {
 //		log.info("getList.......");
@@ -69,15 +71,36 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	// 정상적으로 쿼리가 수행될 경우 1이라는 값이 반환 되기에 ==1을 사용
+	@Transactional
 	@Override
 	public boolean modify(BoardVO board) {
 		log.info("modify......." + board);
-		return mapper.update(board) == 1;
+		
+		attachMapper.deleteAll(board.getBno());
+		
+		boolean modifyResult = mapper.update(board) == 1;
+		
+		if (modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
+			board.getAttachList().forEach(attach -> {
+				attach.setBno(board.getBno());
+				attachMapper.insert(attach);
+			});
+		}
+		
+		return modifyResult;
 	}
 	
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		log.info("remove......" + bno);
+		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
+	}
+	
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		log.info("get Attach List by bno" + bno);
+		return attachMapper.findByBno(bno);
 	}
 }
