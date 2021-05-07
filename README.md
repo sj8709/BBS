@@ -196,19 +196,8 @@ root-context
 - 첨부파일 관련 항목 추가
 - 파일 추가, 제거, 다운로드, 이미지의 경우 확대 기능
 #### Quartz 라이브러리 추가
--
-<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-<dependency>
-    <groupId>org.quartz-scheduler</groupId>
-    <artifactId>quartz</artifactId>
-    <version>2.3.0</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs -->
-<dependency>
-    <groupId>org.quartz-scheduler</groupId>
-    <artifactId>quartz-jobs</artifactId>
-    <version>2.3.0</version>
-</dependency>
+- quartz 2.3.0
+- quartz-jobs 2.3.0
 #### FileCheckTask.java 추가
 - Quartz 라이브러리를 사용한 스케줄러로써 DB와 실제 저장소를 비교해 불필요한 파일 자동 삭제
 
